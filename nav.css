@@ -1,0 +1,87 @@
+*{
+    margin: 0; padding: 0;
+    text-decoration: none;
+}
+body{
+    background: url(./1.jpg) no-repeat center center;
+    background-size: cover;
+}
+main{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#container{
+    display: inline-block;
+}
+#container > div:nth-child(2){
+    margin-left: 0.5em;
+}
+#container > div:nth-child(3){
+    margin-left: 0.5em;
+}
+.rowSpacing{
+    margin: 30px 0;
+}
+kbd{
+    width: 4em;
+    height: 4em;
+    display: inline-block;
+    position: relative;   
+    text-transform: uppercase;
+    margin: 0 10px;
+}
+kbd > span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;  
+}
+kbd:hover >span{
+    display: inline-block;
+}
+kbd span a{
+    display: inline-block;
+    border-radius: 3px; 
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
+    margin-top: 2px;
+    background: orange;
+    font-size: 16px; 
+    cursor:pointer; 
+    color:#FFF;
+    font-weight: 600;
+}
+kbd span a:hover{
+    text-decoration: none;
+    background: #fff;
+    color: #000;
+}
+.key{
+    width: 70px; 
+    height: 60px; 
+    background: linear-gradient(to bottom, #292929 0%,#111111 100%); 
+    border: 1px solid #373737; 
+    color:#65F9D0; 
+    border-radius: 10px; 
+    box-shadow: 0 0 0 1px #1A1B1C, 0 0 0 2px #1F2020, 0 3px 0 2px #080808; 
+    position: relative;
+    font-size: 22px; 
+    font-family: 'Franklin Gothic Medium';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.key img{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 3px 5px;
+    border-radius: 8px;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Summer's Navigation</title>
+    <link rel="stylesheet" href="nav.css">
+</head>
+<body>
+    <main>
+        <div class="outer"  id="container"></div>
+    </main>
+    <script>
+        // 生成初始数据
+        var keys = {
+            0:['q','w','e','r','t','y','u','i','o','p'],
+            1:['a','s','d','f','g','h','j','k','l'],
+            2:['z','x','c','v','b','n','m'],
+            length: 3
+        }
+        var hash = {
+            w:'alpha.wallhaven.cc',
+            t:'taobao.com',
+            y:'y.qq.com',
+            i:'imooc.com',
+            o:'open.163.com',
+            a:'iqiyi.com',
+            s:'segmentfault.com',
+            d:'dianping.com',
+            g:'github.com',
+            j:'jd.com',
+            z:'zhihu.com',
+            x:'xiedaimala.com',
+            b:'cn.bing.com',
+            n:'amazon.cn',
+            m:'music.163.com',
+        }
+
+        // 取出之前存在localStorage里的hash
+        var hashInLocalStorage = JSON.parse(localStorage.getItem('saveWebsite')||'null')
+        if(hashInLocalStorage){
+            hash = hashInLocalStorage
+        }
+
+        // 生成键盘
+            // 遍历 keys, 生成 kbd 标签
+        for(indexD = 0; indexD < keys.length; indexD++){
+            var addDiv = document.createElement('div')                  // 给我一个字符串，返回一个元素
+            addDiv.className = 'rowSpacing' 
+            container.appendChild(addDiv)
+            var row = keys[indexD]
+            for(indexK = 0; indexK < row.length; indexK++){
+                var addKeyBoard = document.createElement('kbd')
+                addKeyBoard.textContent = row[indexK]
+                addKeyBoard.className = 'key'
+                var addImage = document.createElement('img')
+                if(hash[row[indexK]]){
+                    addImage.src = 'http://' + hash[row[indexK]] + '/favicon.ico'
+                }else{
+                    addImage.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                }
+                addImage.onerror = function(fail){
+                    // console.log(fail.target)
+                    fail.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                } 
+                var addSpan = document.createElement('span')
+                var addAhref = document.createElement('a')   
+                addAhref.textContent = 'E'
+                addAhref.title = '编辑'
+                addAhref.id = row[indexK]
+                addAhref.onclick = function(click){
+                    // console.log(click.target.id) 查看当前点击元素
+                    var userClickKeyName = click.target.id
+                    var userInputWebsiteAddress = prompt('give me a website address')
+                    hash[userClickKeyName] = userInputWebsiteAddress    // hash 变更 
+                    localStorage.setItem('saveWebsite', JSON.stringify(hash))
+                    // console.log(hash)  查看hash变更情况
+                }
+                addSpan.appendChild(addAhref)
+                addKeyBoard.appendChild(addImage)
+                addKeyBoard.appendChild(addSpan)
+                addDiv.appendChild(addKeyBoard)
+            }  
+        }
+
+        // 监听键盘
+        document.onkeypress = function(click){
+            // click是事件对象,容纳你按键时的所有信息. key为事件对象的属性, key值对应你按键的名字(a,s,d...)
+            var touchKey = click['key'] 
+            var website = hash[touchKey]
+            window.open('http://' + website, '_blank')
+        }
+    </script>
+</body>
+</html>
